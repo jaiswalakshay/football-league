@@ -2,7 +2,6 @@ package com.sapient.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.sapient.services.LeagueService;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
@@ -13,12 +12,20 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ *
+ */
 @Component
 public class HttpGetUtility {
 
     private final static Logger log = LoggerFactory.getLogger(HttpGetUtility.class);
-    final private static ObjectMapper mapper = new ObjectMapper();
-    public ArrayNode getResult(String uri) {
+    private final static ObjectMapper mapper = new ObjectMapper();
+
+    /**
+     * @param uri
+     * @return
+     */
+    public ArrayNode getResult(final String uri) {
         ArrayNode response = null;
         HttpClient client = new HttpClient();
         GetMethod method = new GetMethod(uri);

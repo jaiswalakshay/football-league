@@ -2,7 +2,6 @@ package com.sapient.services;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.sapient.models.LeagueDetail;
 import com.sapient.utilities.HttpGetUtility;
@@ -12,13 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ */
 @Service
 public class LeagueService {
 
     private final static Logger log = LoggerFactory.getLogger(LeagueService.class);
 
     @Value("${API_KEY}")
-    private String apiKey ;
+    private String apiKey;
 
     @Value("standing.uri")
     private String standingUri;
@@ -26,7 +28,12 @@ public class LeagueService {
     @Autowired
     private HttpGetUtility httpGetUtility;
 
-
+    /**
+     * @param countryName
+     * @param leagueName
+     * @param teamName
+     * @return
+     */
     public LeagueDetail getLeagueDetail(String countryName, String leagueName, String teamName) {
         LeagueDetail leagueDetail = new LeagueDetail();
         String countryId = getCountryIdByName(countryName);
@@ -44,6 +51,11 @@ public class LeagueService {
         return leagueDetail;
     }
 
+    /**
+     * @param leagueName
+     * @param countryId
+     * @return
+     */
     public String getLeagueIdByName(String leagueName, String countryId) {
         String response = null;
         String uri = "https://apifootball.com/api/?action=get_leagues&country_id=" + countryId + "&APIkey=" + apiKey;
@@ -57,6 +69,10 @@ public class LeagueService {
         return response;
     }
 
+    /**
+     * @param countryName
+     * @return
+     */
     public String getCountryIdByName(String countryName) {
         String uri = "https://apifootball.com/api/?action=get_countries&APIkey=" + apiKey;
         ArrayNode countries = httpGetUtility.getResult(uri);
@@ -68,6 +84,10 @@ public class LeagueService {
         return null;
     }
 
+    /**
+     * @param leagueId
+     * @return
+     */
     public ArrayNode getStandings(String leagueId) {
         String uri = standingUri + leagueId + "&APIkey=" + apiKey;
         ArrayNode leagueDetails = httpGetUtility.getResult(uri);

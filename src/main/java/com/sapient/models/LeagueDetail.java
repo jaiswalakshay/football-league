@@ -3,6 +3,9 @@ package com.sapient.models;
 
 import lombok.Data;
 
+/**
+ *
+ */
 @Data
 public class LeagueDetail {
     String countryId;
