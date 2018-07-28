@@ -26,7 +26,7 @@ public class LeagueController {
     private static final Logger logger = LoggerFactory.getLogger(LeagueController.class);
 
     @Autowired
-    private LeagueService leagueService;
+    private LeagueService leagueLeagueService;
 
     /**
      * @param countryName
@@ -40,7 +40,7 @@ public class LeagueController {
                                                                @RequestParam(value = "team_name", required = true) String teamName) {
 
 
-        return new ResponseEntity<>(leagueService.getLeagueDetail(countryName, leagueName, teamName), HttpStatus.OK);
+        return new ResponseEntity<>(leagueLeagueService.getLeagueDetail(countryName, leagueName, teamName), HttpStatus.OK);
     }
 
     /**
