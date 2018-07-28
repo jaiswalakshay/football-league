@@ -25,7 +25,7 @@ public class APIFootBallLeagueService implements LeagueService {
     @Value("${API_KEY}")
     private String apiKey;
 
-    @Value("standing.uri")
+    @Value("${standing.uri}")
     private String standingUri;
 
     @Autowired
